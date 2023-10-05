@@ -23,3 +23,9 @@
 ・インフラなど(AWS, Docker, MySQL)
 
 ・その他(GoogleMapsAPI)
+
+## 要件定義
+
+詳細はこちらからご覧ください
+
+https://docs.google.com/spreadsheets/d/1Xw7Ek04I66hVouqm6_o23O6WLTrCG7z4EHfg_DX18zs/edit#gid=217497615
