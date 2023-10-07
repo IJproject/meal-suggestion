@@ -65,5 +65,9 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
-# コンテナの起動
+### コンテナの起動
 docker compose exec app bash
+
+### やることメモ
+・InertiaとLaravel-breezeのインストール
+・Dockerfile内のキーなどの機密情報を.envへの移行
