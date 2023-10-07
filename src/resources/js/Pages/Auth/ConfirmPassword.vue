@@ -22,7 +22,7 @@ const submit = () => {
         <Head title="Confirm Password" />
 
         <div class="mb-4 text-sm text-gray-600">
-            This is a secure area of the application. Please confirm your password before continuing.
+            これはアプリケーションの安全なエリアです。続行する前にパスワードを確認してください。
         </div>
 
         <form @submit.prevent="submit">
@@ -42,7 +42,7 @@ const submit = () => {
 
             <div class="flex justify-end mt-4">
                 <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Confirm
+                    認証
                 </PrimaryButton>
             </div>
         </form>
