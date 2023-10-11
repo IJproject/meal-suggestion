@@ -5,5 +5,5 @@ const message: string = 'Hello World!'
 </script>
 
 <template>
-    <h1>{{ message }}</h1>
+    <h1>{{ message }}22</h1>
 </template>
