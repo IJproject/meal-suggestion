@@ -68,6 +68,19 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 ### コンテナの起動
 docker compose exec app bash
 
+### EC2へのログイン
+ssh -i /path/to/your/key.pem ec2-user@your-ec2-public-ip
+
+### ファイルアップロード
+scp -i /path/to/your/key.pem -r /path/to/your/local/project ec2-user@your-ec2-public-ip:/path/to/destination/on/ec2 (全て)
+
+rsync -avz -e "ssh -i /path/to/your/key.pem" /path/to/your/local/project/ ec2-user@your-ec2-public-ip:/path/to/destination/on/ec2/ (差分)
+
+※ S3にファイルをアップロードする方法もあるらしい
+
+
 ### やることメモ
-・InertiaとLaravel-breezeのインストール
+
 ・Dockerfile内のキーなどの機密情報を.envへの移行
+・ログインしていないとログイン後の機能は使えないように(コンストラクタ)
+・ルーレットで使うデータをAPIとして管理

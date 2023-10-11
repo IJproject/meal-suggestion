@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -30,6 +31,11 @@ Route::get('/', function() {
 })->name('home');
 
 Route::middleware('auth')->group(function () {
+
+    Route::get('/user/home', [UserController::class, 'home'])->name('user.home');
+    Route::get('/user/map', [UserController::class, 'map'])->name('user.map');
+    Route::get('/user/random', [UserController::class, 'random'])->name('user.random');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
