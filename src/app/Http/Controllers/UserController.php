@@ -13,7 +13,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
-            $this->user = Auth::user();
+            $this->currentUser = Auth::user();
             return $next($request);
         });
     }
@@ -21,21 +21,21 @@ class UserController extends Controller
     public function home()
     {
         return Inertia::render('User/Home', [
-            'user' => $this->user,
+            'user' => $this->currentUser,
         ]);
     }
 
     public function map()
     {
         return Inertia::render('User/Map', [
-            'user' => $this->user,
+            'user' => $this->currentUser,
         ]);
     }
 
     public function random()
     {
         return Inertia::render('User/Random', [
-            'user' => $this->user,
+            'user' => $this->currentUser,
         ]);
     }
 }

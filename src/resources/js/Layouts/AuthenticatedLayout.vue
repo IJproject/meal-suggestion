@@ -29,6 +29,7 @@ const showingNavigationDropdown = ref(false);
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <NavLink href="/user/home" :active="route().current('user.home')">ホーム</NavLink>
+                                <NavLink href="/blog" :active="route().current('blog.*')">ブログ</NavLink>
                                 <NavLink href="/user/map" :active="route().current('user.map')">マップ検索</NavLink>
                                 <NavLink href="/user/random" :active="route().current('user.random')">ジャンル検索</NavLink>
                             </div>
@@ -51,6 +52,7 @@ const showingNavigationDropdown = ref(false);
 
                                     <template #content>
                                         <DropdownLink href="/user/home">ホーム</DropdownLink>
+                                        <DropdownLink href="/blog">ブログ</DropdownLink>
                                         <DropdownLink href="/user/map">マップ検索</DropdownLink>
                                         <DropdownLink href="/user/random">ジャンル検索</DropdownLink>
                                         <hr>
@@ -79,6 +81,7 @@ const showingNavigationDropdown = ref(false);
                     <div class="pt-4 pb-1 border-t border-gray-200">
                         <div class="space-y-1">
                             <ResponsiveNavLink href="/user/home">ホーム</ResponsiveNavLink>
+                            <ResponsiveNavLink href="/blog">ブログ</ResponsiveNavLink>
                             <ResponsiveNavLink href="/user/map">マップ検索</ResponsiveNavLink>
                             <ResponsiveNavLink href="/user/random">ジャンル検索</ResponsiveNavLink>
                             <hr>
