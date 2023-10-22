@@ -12,10 +12,8 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route('blog.store'));
+    form.put(route('blog.update', props.blog.id));
 }
-
-
 </script>
 
 <template>

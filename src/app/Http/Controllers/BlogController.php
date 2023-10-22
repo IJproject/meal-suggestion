@@ -43,7 +43,7 @@ class BlogController extends Controller
         }
 
         $blog->load('user');
-        
+
         return Inertia::render('Blog/Show', [
             'blog' => $blog,
             'hasAccessRight' => $hasAccessRight,
@@ -77,17 +77,39 @@ class BlogController extends Controller
         ]);
     }
 
-    public function update(Blog $blog)
+    public function update(Request $request, Blog $blog)
     {
         if($blog->user_id !== $this->currentUser->id){
             abort(404);
-        }
+        };
+
+        $request->validate([
+            'title' => 'required|string',
+            'content' => 'required|string',
+        ]);
+
+        $blog->fill($request->only(['title', 'content']))->save();
+
+        $blog->load('user');
+
+        return Inertia::render('Blog/Show', [
+            'blog' => $blog,
+            'hasAccessRight' => true,
+        ]);
     }
 
-    public function delete(Blog $blog)
+    public function destroy(Blog $blog)
     {
+        
         if($blog->user_id !== $this->currentUser->id){
             abort(404);
         }
+
+        $blog->delete();
+
+        $blogs = Blog::with('user')->get();
+        return Inertia::render('Blog/Index', [
+            'blogs' => $blogs,
+        ]);
     }
 }

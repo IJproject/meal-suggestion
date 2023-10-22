@@ -43,6 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/blog/{blog}/edit', [BlogController::class, 'edit'])->name('blog.edit');
     Route::post('/blog', [BlogController::class, 'store'])->name('blog.store');
     Route::put('/blog/{blog}', [BlogController::class, 'update'])->name('blog.update');
+    Route::delete('/blog/{blog}', [BlogController::class, 'destroy'])->name('blog.destroy');
 
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
