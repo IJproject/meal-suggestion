@@ -40,9 +40,13 @@ const clickedBlog = (blogId: number) => {
                 </div>
             </form>
 
+            <div class="flex justify-end">
+                <Link :href="route('blog.create')" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 whitespace-nowrap">新規投稿</Link>
+            </div>
+
             <!-- 表示 -->
             <div class="grid grid-cols-3 gap-6">
-                <div v-for="blog in props.blogs" :key="blog.id" @click="clickedBlog(blog.id)" class="col-span-1 bg-white shadow-lg" >
+                <div v-for="blog in props.blogs" :key="blog.id" @click="clickedBlog(blog.id)" class="col-span-1 bg-white shadow-lg cursor-pointer" >
                     <div class="px-4 py-2 font-semibold border-b border-b-gray-300">
                         {{ blog.user.name }}
                     </div>
