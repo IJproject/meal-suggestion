@@ -4,11 +4,12 @@ import { Link, router, useForm } from '@inertiajs/vue3';
 
 const props = defineProps({
     blogs: Object,
+    search: Object,
 });
 
 const searchForm = useForm({
-    title: '',
-    user: '', 
+    title: props.search.title,
+    userName: props.search.userName, 
 });
 
 const search = () => {
@@ -32,7 +33,7 @@ const clickedBlog = (blogId: number) => {
                     </label>
                     <label class="block w-full">
                         投稿者
-                        <input v-model="searchForm.user" class="rounded-md py-1 px-2 text-gray-900 shadow-sm border border-gray-300 placeholder:text-gray-400 focus:ring-1 focus:outline-none focus:border-indigo-500 focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                        <input v-model="searchForm.userName" class="rounded-md py-1 px-2 text-gray-900 shadow-sm border border-gray-300 placeholder:text-gray-400 focus:ring-1 focus:outline-none focus:border-indigo-500 focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                     </label>
                 </div>
                 <div class="">

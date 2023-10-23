@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use App\Models\User;
 use App\Models\Blog;
 
 class BlogController extends Controller
@@ -19,14 +20,30 @@ class BlogController extends Controller
 
     public function index(Request $request)
     {
-        // if(!is_null($request->user)){
-        //     dd($request);
-        // };
-        // サーチ機能つけたいね
-        $blogs = Blog::with('user')->get();
+        $search = (object)[];
+        $blogs = $this->searchBlog($request, $search);
+        
         return Inertia::render('Blog/Index', [
             'blogs' => $blogs,
+            'search' => $search,
         ]);
+    }
+
+    private function searchBlog($request, &$search)
+    {
+        $search->title = $request->title;
+        $search->userName = $request->userName;
+
+        if(!is_null($request->user) && !is_null($request->title)){
+            $blogs = Blog::where('title', 'LIKE', "%{$search->title}%")->with('user')->get();
+        } else if(!is_null($request->user)) {
+            $blogs = Blog::with('user')->get();
+        } else if(!is_null($request->title)) {
+            $blogs = Blog::where('title', 'LIKE', "%{$request->title}%")->with('user')->get();
+        } else {
+            $blogs = Blog::with('user')->get();
+        }
+        return $blogs;
     }
 
     public function create()
@@ -36,7 +53,7 @@ class BlogController extends Controller
 
     public function show(Blog $blog)
     {
-        // 編集と削除の権限
+        // 編集と削除の権限あればTrue、なければFalse
         $hasAccessRight = true;
         if($blog->user_id !== $this->currentUser->id){
             $hasAccessRight = false;
