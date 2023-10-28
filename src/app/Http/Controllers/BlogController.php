@@ -34,21 +34,7 @@ class BlogController extends Controller
         $search->title = $request->title;
         $search->userName = $request->userName;
 
-        // ここスコープ使って可読性上げた方が良いかも
-        if(!is_null($request->userName) && !is_null($request->title)){
-            $blogs = Blog::where('title', 'LIKE', "%{$search->title}%")->with('user')->whereHas('user', function($query) use ($search) {
-                $query->where('name', 'LIKE', "%{$search->userName}%");
-            })->get();
-        } else if(!is_null($request->userName)) {
-            $blogs = Blog::with('user')->whereHas('user', function($query) use ($search) {
-                $query->where('name', 'LIKE', "%{$search->userName}%");
-            })->get();
-        } else if(!is_null($request->title)) {
-            $blogs = Blog::where('title', 'LIKE', "%{$request->title}%")->with('user')->get();
-        } else {
-            $blogs = Blog::with('user')->get();
-        }
-        return $blogs;
+        return Blog::searchBlog($search)->get();
     }
 
     public function create()
