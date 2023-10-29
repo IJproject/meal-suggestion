@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use App\Services\GoogleMapsService;
 
 class UserController extends Controller
 {
@@ -25,10 +26,29 @@ class UserController extends Controller
         ]);
     }
 
-    public function map()
+    public function map(Request $request, GoogleMapsService $googleMapsService)
     {
+        
+        $existResponse = false;
+
+        $search = (object)[];
+        $isValidRequest = $request->selectedType && $request->selectedRadius && $request->latitude && $request->longitude;
+
+        if($isValidRequest){
+            // dd($googleMapsService->getCoordinatesFromAddress(''));
+
+            $existResponse = true;
+
+            $search->selectedType = $request->selectedType;
+            $search->selectedRadius = $request->selectedRadius;
+            $search->latitude = $request->latitude;
+            $search->longitude = $request->longitude;
+        }
+        
         return Inertia::render('User/Map', [
             'user' => $this->currentUser,
+            'search' => $search,
+            'existResponse' => $existResponse,
         ]);
     }
 
