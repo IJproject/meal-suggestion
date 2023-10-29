@@ -35,14 +35,15 @@ class UserController extends Controller
         $isValidRequest = $request->selectedType && $request->selectedRadius && $request->latitude && $request->longitude;
 
         if($isValidRequest){
-            // dd($googleMapsService->getCoordinatesFromAddress(''));
-
+            
             $existResponse = true;
 
             $search->selectedType = $request->selectedType;
             $search->selectedRadius = $request->selectedRadius;
             $search->latitude = $request->latitude;
             $search->longitude = $request->longitude;
+
+            dd($googleMapsService->getCoordinatesFromAddress($search));
         }
         
         return Inertia::render('User/Map', [
